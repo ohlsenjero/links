@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=”robots”content=”noindex, nofollow” />
+  <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+    
+  <title></J Ohlsen></title>
+    <style>
+
+      @charset "UTF-8";
+
+
+      @font-face {
+          font-family: 'adam';
+          src:url('./font/adam-webfont.eot');
+          src:url('./font/adam-webfont.eot?#iefix') format('embedded-opentype'),
+              url('./font/adam-webfont.svg#tadam') format('svg'),
+              url('./font/adam-webfont.woff') format('woff'),
+              url('./font/adam-webfont.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+      @font-face {
+          font-family: 'neoteric';
+          src:url('./font/neoteric_-_bold_demo_version-webfont.eot');
+          src:url('./font/neoteric_-_bold_demo_version-webfont.eot?#iefix') format('embedded-opentype'),
+              url('./font/neoteric_-_bold_demo_version-webfont.svg#tneoteric_-_bold_demo_version') format('svg'),
+              url('./font/neoteric_-_bold_demo_version-webfont.woff') format('woff'),
+              url('./font/neoteric_-_bold_demo_version-webfont.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+
+      @font-face {
+          font-family: 'megan_june';
+          src:url('./font/megan_june-webfont.eot');
+          src:url('./font/megan_june-webfont.eot?#iefix') format('embedded-opentype'),
+              url('./font/megan_june-webfont.svg#tmegan_june') format('svg'),
+              url('./font/megan_june-webfont.woff') format('woff'),
+              url('./font/megan_june-webfont.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+
+      html,body { 
+        height:100%; 
+        margin: 0;
+        overflow: hidden;
+        background-color: #ddd;
+      }
+
+      #main {
+        position: relative;
+        height: 100%;
+        width:100%;
+      }
+      #section, #section-overlay{
+        width:100%;
+        background-size: cover;
+      }
+
+      #section, #inner, #section-overlay, #inner-info{
+        position: absolute;
+        display: block;
+        
+        top:0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        /* same as first index in bg Object*/
+      }
+
+      #section-overlay{
+        z-index: 2;
+        opacity: 0;
+      }
+      #inner {
+        margin-top:-10px;/**makes up for the border pixels*/
+      }
+
+      #inner-info {
+        display: none;
+        width:100%;
+        z-index: 6;
+        background-color: red;
+      }
+
+      #go-left {
+        position: absolute;
+        top:0;
+        height: 100%;
+        left: 0;
+        width:14%;
+        background-image: url('left-white.png');
+        background-size: 100% 100%;
+        opacity: 0.7;
+
+        z-index: 7;
+      }
+
+      #go-right {
+        position: absolute;
+        top:0;
+        height: 100%;
+        right: 0;
+        width:14%;
+        background-image: url('right-white.png');
+        background-size: 100% 100%;
+        opacity: 0.7;
+
+        z-index: 7;
+
+      }
+
+      #go-left:hover, #go-right:hover {
+        cursor: pointer;
+      }
+
+      #inner div {
+        border-radius: 2px;
+        border: solid 1px #aaa;
+        background-color: rgba(255,255,255,0.86);
+        width:100%;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        visibility: hidden;
+        opacity: 0;
+        
+      }
+
+      a{
+        text-decoration: none;/*
+        background-color: rgba(255, 255, 255, 0.9);*/
+        color:#000;
+        padding: 10px;
+        margin: 0 auto;
+        display: inline-block;
+        /*media query THIS 5%*/
+
+        font-family: "megan_june";
+        /*font-weight: bold;*/
+      }
+
+      .blinking {
+        animation: blinker 1s linear infinite;
+      }
+
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .more {
+        float: right;
+        display: none;
+        /*margin-left: 20px;*/
+        height: 42px;
+        width:40px;
+        background-color: black;
+      }
+
+      .more:hover {
+        cursor: progress;
+      }
+
+      aside {
+        display: none;
+      }
+
+      .bg-sections {
+        opacity: 0.1;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <div id="main">
+      <div id="go-left"></div><div id="go-right" ></div>
+
+      <div class="bg-sections">
+        <div id="section">
+            
+        </div>
+        <div id="section-overlay">
+            
+        </div>
+
+      </div>
+
+
+      <div id="inner">
+          
+      </div>
+      
+
+        
+        
+
+        <div id="inner-info">
+          
+        </div>
+
+      
+    </div>
+
+
+    <script>     
+      /// <section> will be populated with 5 diff sub-sections
+
+        ///change name .. section:, imgs:, links:
+      var sex = [
+        {color:["url('img/1.4.png')","url('img/1.1.png')", "url('img/1.2.png')"], section: 2, links:{
+                                          googleMaps:"<div><a href='https://raw.githack.com/ohlsenjero/mapsAPI/master/index.html' target='_blank'>Google Maps API</a><span class='more'></span><aside>blablabla1</aside></div>", 
+                                          php:"<div><a href='https://jerohlsen.000webhostapp.com/session/sessionform.php' target='_blank'>PHP - jQuery - session data form</a><span class='more'></span><aside>blablabla2</aside></div>"}}, 
+        {color:["url('img/2.6.png')", "url('img/2.2.png')", "url('img/2.4.png')", "url('img/2.5.png')"], section: 1, links:{
+                                          game:"<div><a href='https://raw.githack.com/ohlsenjero/gameJS/master/index.html' target='_blank'>Javascript Game - OO </a><span class='more'></span><aside>blablabla1</aside></div>"}},
+        {color:["url('img/3.3.png')", "url('img/3.2.png')", "url('img/3.1.png')"], section: 3, links:{
+                                          inmundo:"<div><a href='https://pablo-juan.herokuapp.com/varios' target='_blank'>Node JS App - login/register/upload/update</a><span class='more'></span><aside>blablabla1</aside></div>", 
+                                          inmundo2:"<div><a href='https://sharvid.herokuapp.com/posts' target='_blank'>Node JS App 2.0 - work in progress</a><span class='more'></span><aside>blablabla1</aside></div>", 
+                                          andesSantiago:"<div><a href='https://andes-santiago.herokuapp.com/' target='_blank'>Node JS - file upload/contact system</a><span class='more'></span><aside>blablabla1</aside></div>"}}, 
+        {color:["url('img/4.2.png')", "url('img/4.3.png')", "url('img/4.1.png')"], section: 4, links: {
+                                          portfolio1:"<div><a href='https://jerohlsen.000webhostapp.com/DMlive-site/index.html' target='_blank'>GreenSock JS experimental -  portfolio 2013</a><span class='more'></span><aside>blablabla1</aside></div>", 
+                                          portfolio2:"<div><a href='https://raw.githack.com/ohlsenjero/portf/master/index.html#about' target='_blank'>Waypoints - jQuery - portfolio 2015</a><span class='more'></span><aside>blablabla1</aside></div>"}},
+        {color:["url('img/5.2.png')", "url('img/5.7.png')", "url('img/5.4.png')", "url('img/5.1.png')", "url('img/5.3.png')"], section: 5, links:{
+                                            googleScripts:"<div><a href='https://github.com/ohlsenjero/knack-appenate_google-scripts' target='_blank'>Google Apps Script - database API - JSON</a><span class='more'></span><aside>blablabla1</aside></div>"}}
+      ]/// sectionsArray
+      
+      var numberOfSections = sex.length;
+      var x=1;
+
+      var overlaying = false;
+
+      var v;
+      var tt;
+      var t;
+
+      var blinkButtonLeft= document.getElementById('go-left');
+      blinkButtonLeft.addEventListener('mouseover', function(){
+        this.className += " "+"blinking";
+      });
+      blinkButtonLeft.addEventListener('mouseout', function(){
+        var reg = new RegExp('(\\s|^)'+"blinking"+'(\\s|$)');
+        this.className=this.className.replace(reg,' ');
+      });
+      var blinkButtonRight= document.getElementById('go-right');
+      blinkButtonRight.addEventListener('mouseover', function(){
+        this.className += " "+"blinking";
+      });
+      blinkButtonRight.addEventListener('mouseout', function(){
+        var reg = new RegExp('(\\s|^)'+"blinking"+'(\\s|$)');
+        this.className=this.className.replace(reg,' ');
+      });
+
+      var memberDir;
+
+      var goRight = document.getElementById('go-right');
+      goRight.addEventListener('click', function(){
+        memberDir="r";
+        if(!clickStop){
+          clicked("r");
+        }
+        clickStop=true;
+        
+      });
+
+      var goLeft = document.getElementById('go-left');
+      goLeft.addEventListener('click', function(){
+        memberDir="l";
+        if(!clickStop){
+          clicked("l");
+        }
+        clickStop=true;
+      });
+
+      /// ALSO USE left - rigth KEYS
+      window.addEventListener('keyup', onKeyboardEventOUT, false);
+      function onKeyboardEventOUT (event) {
+        setTimeout(function(){
+          clickStop=false;
+        }, 300);    
+      }
+
+      window.addEventListener('keydown', onKeyboardEvent, false);
+      function onKeyboardEvent (event) {
+        event.stopPropagation();
+
+
+        if(event.keyCode==37){
+          memberDir="l";
+          if(!clickStop){
+            clicked("l");
+          }
+          clickStop=true;
+          console.log("LEFT");
+        }else if(event.keyCode==39){
+          memberDir="r";
+          if(!clickStop){
+            clicked("r");
+          }
+          clickStop=true;
+          console.log("RIGHT");
+        }else if(event.keyCode==32){
+          
+          if(!clickStop){
+            if(memberDir=="r"){
+              clicked("r");
+            }else if(memberDir=="l"){
+              clicked("l");
+            }else{
+              clicked("r");
+            }
+            
+          }
+          clickStop=true;
+        }   
+      }
+
+      var amountLinks;
+      var fSize = 60;
+      var op = 0;
+
+      ///on Load only.. triggers clicked Func before there is any actual click
+                            /// shoudn't be called clicked but Anim or smthing
+      clicked("x");
+
+      function clicked(dir){
+
+
+        clearTimeout(t);
+        clearTimeout(tt);
+        fSize = 60;
+        op=0;
+        
+        setTimeout(function(){
+            clickStop=false;
+        }, 500);
+
+        document.getElementById('inner').innerHTML ="";
+
+        if(dir == "l"){
+          document.getElementById('go-left').style.opacity=0;
+          x--;
+          if(x <1){
+            x=numberOfSections;
+
+          }
+          //console.log("X is :"+x);
+        }else if(dir == "r"){
+          document.getElementById('go-right').style.opacity=0;
+          x++;
+          if(x>numberOfSections){
+            x=1;
+
+          }
+          //console.log("X is :"+x);
+        }else if(dir == "k"){
+          x=x;
+          //when resizing nothing changes
+        }else{
+          x=1;
+          
+        } 
+/////////////////////
+        changeColor(1, 2, "first");
+
+        for (var i = 0; i < sex.length; i++) {
+          if(sex[i].section==x){
+            //alert(sex[i].color.length);
+            
+            //document.getElementById('section').style.backgroundColor = sex[i].color[0];
+
+            document.getElementById('inner').style.top = 0;
+            document.getElementById('inner').style.bottom = 0;
+            document.getElementById('inner').style.left = 0;
+            document.getElementById('inner').style.right = 0;
+            document.getElementById('inner').style.width -= 100 + "%";
+
+            //console.log(sex[i].links);
+            amountLinks =Object.values(sex[i].links).length;
+            //console.log("how many links ?"+amountLinks);
+            var actualLinks = [];
+
+
+              //console.log("DALE "+ Object.values(sex[i].links));
+              actualLinks= Object.values(sex[i].links);
+              
+            for(var e = 0; e< amountLinks; e++){               
+                /// index 0 is link _ index 1 is desc
+              document.getElementById('inner').innerHTML +=actualLinks[e];
+              //document.getElementById('inner').innerHTML +=actualLinks[e][1]; 
+               
+            }
+                
+            animateInner(0, true, amountLinks, actualLinks, dir);
+          }   
+        }
+
+        /// needs to be added in here, or else the elems-className > .more   won't exists yet
+        //                                                                      being aded just above
+        var viewMore = document.getElementsByClassName('more');
+          //alert(viewMore.length);
+          for (var i = 0; i<viewMore.length; i++) {
+            viewMore[i].addEventListener('click', function(){
+              //alert(this.nextSibling.innerHTML);
+              document.getElementById('inner-info').style.display="block";
+            });
+          }
+
+      }//clicked Func()
+
+
+      var c = 0;
+
+      var arrowDir;
+      
+      function animateInner(count, wait, amount, links, whichArrowFade){
+        
+        if(wait){
+          setTimeout(function(){
+            arrowDir = whichArrowFade;
+            //console.log('waiting');
+            wait=false;
+            animateInner(count, wait);
+          }, 100);
+        }else{
+
+          count += 1;
+          //console.log(op);
+          fSize-=fSize/17;
+          if(fSize<25){
+            /// prevents repeated (keyPress) from messing up with it
+            fSize=25;
+            ////////////// & CHANGE THIS 20 DEPENDING ON SCREEN-SIZE
+          }
+          op += 1/15;
+          
+          setTimeout(function(){ 
+
+            if(count<15){
+
+              document.getElementById('inner').style.top = count + "%";
+              document.getElementById('inner').style.bottom = count + "%";
+
+              document.getElementById('inner').style.left = count*2 + "%";
+              document.getElementById('inner').style.right = count*2 + "%";
+              document.getElementById('inner').style.width -= count*1.3 + "%";
+
+              for(var i = 0; i< amountLinks; i++){
+
+
+                var anchor = document.getElementById('inner').getElementsByTagName("div");
+                
+                var blinko= document.getElementById('inner').getElementsByTagName("a");
+                blinko[i].addEventListener('mouseover', function(){
+                  this.className += " "+"blinking";
+                });
+                blinko[i].addEventListener('mouseout', function(){
+                  var reg = new RegExp('(\\s|^)'+"blinking"+'(\\s|$)');
+                  this.className=this.className.replace(reg,' ');
+                });
+
+                anchor[i].style.fontSize= fSize+"px";
+                anchor[i].style.lineHeight= fSize*1.3+"px";
+                if(op>0.2){
+                  
+                  anchor[i].style.visibility = "visible";
+                }
+                
+                if(op>0.3){
+                  if(arrowDir=="l"){
+                    document.getElementById('go-left').style.opacity=0.2;
+                  }else if(arrowDir=="r"){
+                    document.getElementById('go-right').style.opacity=0.2;
+                  }
+                }
+                if(op>0.4){
+                  if(arrowDir=="l"){
+                                    console.log(arrowDir);
+
+                    document.getElementById('go-left').style.opacity=0.4;
+                  }else if(arrowDir=="r"){
+                    document.getElementById('go-right').style.opacity=0.4;
+                  }
+                }
+                if(op>0.5){
+                  if(arrowDir=="l"){
+                                    console.log(arrowDir);
+
+                    document.getElementById('go-left').style.opacity=0.7;
+                  }else if(arrowDir=="r"){
+                    document.getElementById('go-right').style.opacity=0.7;
+                  }
+                }
+                anchor[i].style.opacity= op;
+
+                c = document.getElementById('inner').querySelector('div').clientHeight;
+
+                  var a = document.getElementById('inner').getElementsByTagName("div");
+                  //alert(a.length);
+                  for(var k = 0; k<a.length; k++){
+                    //alert(a[k]);
+                    a[k].style.marginTop = ((document.getElementById('inner').clientHeight+c)/(amountLinks+1))-c +"px";
+                  }           
+              }
+              animateInner(count,wait);
+            }
+          }, 20);
+          //                       _
+          //                      / \
+          /// RECURSIVE FUNCTION <  /
+              // counter, style.top/right/bottom/left.... 
+        }
+      }// animateInner Func()
+
+      
+      function changeColor(colours, coloursOver, when){
+        clearTimeout(v);
+        for (var r = 0; r< sex.length; r++) {
+          if(sex[r].section==x){
+
+            console.log(colours);
+            console.log(coloursOver);
+
+            
+            document.getElementById('section').style.backgroundImage = sex[r].color[colours-1];
+            document.getElementById('section-overlay').style.backgroundImage = sex[r].color[coloursOver-1];
+            
+
+            if(colours <sex[r].color.length){
+              colours++;
+            }else if(colours ==sex[r].color.length){
+              colours=1;
+            }
+
+            if(coloursOver <sex[r].color.length){
+              coloursOver++;
+            }else if(coloursOver ==sex[r].color.length){
+              coloursOver=1;
+            }
+
+            ///MAKE THIS OVERLAY GO THROUGH A RECURSIVE FADE-IN function()
+            if(when == "first"){ 
+              changeOverlay(0, colours, coloursOver, "first");            
+            }else{
+              changeOverlay(0, colours, coloursOver);
+            }
+            
+            if(!overlaying){
+              
+              tt = setTimeout(function(){
+                //otherwise too much recursion
+                changeColor(colours, coloursOver);
+              }, 800);          
+            }
+          }   
+        }
+      }// changeColours Func
+
+      function changeOverlay(count, col, colOver, when){
+
+        var colours = col;
+        var coloursOver = colOver;
+        
+        if(count<1){
+          overlaying=true;
+          
+            count+=0.1;
+            //console.log(count);
+
+            if(when == "first"){
+              //console.log(when);
+              document.getElementById('section-overlay').style.opacity = 1;
+            }else{
+              //console.log(when);
+              document.getElementById('section-overlay').style.opacity = count;
+            }
+                   
+          v = setTimeout(function(){
+              changeOverlay(count, colours, coloursOver, when);
+          }, 100); 
+
+        }else{
+
+          t = setTimeout(function(){
+                //otherwise too much recursion
+                changeColor(colours, coloursOver);
+          }, 800);
+
+        }
+      }// changeOverlay Func
+
+
+      window.onresize = function(event) {
+        ///again, clicked should be called something Else << more accurate
+        clicked('k');
+      }
+
+    </script>
+  </body>
+</html>

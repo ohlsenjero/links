@@ -1,0 +1,5 @@
+Try using requestAnimFrame & counters, instead of all these independent setTimeOuts
+
+
+do a quick loop to preLoad images >> create (display none) img tags with each of the imgs in he array
+																	before anything else happens
