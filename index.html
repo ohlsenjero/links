@@ -217,6 +217,37 @@
 
 
     <script>     
+      
+      
+            /// PREloading imgs
+      //--><![CDATA[//><!--
+      var images = new Array()
+      function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+          images[i] = new Image()
+          images[i].src = preload.arguments[i]
+        }
+      }
+      preload(
+        "img/1.4.png",
+        "img/1.1.png",
+        "img/1.2.png",
+        "img/2.4.png",
+        "img/2.5.png",
+        "img/2.2.png",
+        "img/3.1.png",
+        "img/3.3.png",
+        "img/3.2.png",
+        "img/4.1.png",
+        "img/4.3.png",
+        "img/4.2.png",
+        "img/5.3.png",
+        "img/5.2.png",
+        "img/5.1.png",
+        "img/5.4.png",
+        "img/5.7.png"
+      )
+    
       /// <section> will be populated with 5 diff sub-sections
 
         ///change name .. section:, imgs:, links:
